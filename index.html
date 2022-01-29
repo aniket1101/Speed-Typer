@@ -26,7 +26,7 @@
     <button class="reload-button" style="vertical-align:middle" onClick="window.location.reload();"><span> Restart </span></button>
     <div class="container">
         <div class="quote-display" id="quoteDisplay"></div>
-        <textarea id="quoteInput" class="quote-input" autofocus></textarea>
+        <textarea id="quoteInput" class="quote-input" autofocus onkeydown="preventBackspace();"></textarea>
     </div>
 </body>
 </html>

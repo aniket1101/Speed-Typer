@@ -20,7 +20,7 @@ btn.addEventListener('click', () => {
     }
     else {
         playing = true
-        pausedTime = Number(timerElement.innerText)
+        pausedTime = 60 - Number(timerElement.innerText)
         startTimer()
         document.body.style.backgroundColor = "#5cdb95"
         quoteInputElement.classList.toggle('editing');
@@ -48,7 +48,7 @@ quoteInputElement.addEventListener('input', () => {
             characterSpan.classList.add('incorrect')
             correct = false
             numErrors+=1
-            // console.log(numErrors)
+            console.log(numErrors)
             console.log(btn.classList.value)
         }
     })
@@ -68,6 +68,20 @@ function getQuote() {
     .then(data => data.content)
 }
 
+function preventBackspace(e) {
+    var evt = e || window.event;
+    if (evt) {
+        var keyCode = evt.charCode || evt.keyCode;
+        if (keyCode === 8) {
+            if (evt.preventDefault) {
+                evt.preventDefault();
+            } else {
+                evt.returnValue = false;
+            }
+        }
+    }
+}
+
 async function renderNewQuote() {
     const quote = await getQuote()
     quoteDisplayElement.innerHTML = ''
@@ -79,7 +93,6 @@ async function renderNewQuote() {
     quoteInputElement.value = null
     timerElement.innerText = 0
     pausedTime = 0
-    startTimer()
 }
 
 let startTime
@@ -87,7 +100,7 @@ function startTimer() {
     startTime = new Date()
     setInterval(() => {
         if (playing) {
-            timer.innerText = (getTime() + pausedTime)
+            timer.innerText = (60 - pausedTime - getTime())
         }
     }, 1000);
 }
@@ -96,4 +109,5 @@ function getTime() {
         return Math.floor((new Date() - startTime) / 1000)
 }
 
+startTimer()
 renderNewQuote()
