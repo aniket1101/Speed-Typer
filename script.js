@@ -3,7 +3,7 @@ const quoteDisplayElement = document.getElementById('quoteDisplay')
 const quoteInputElement = document.querySelector('.quote-input')
 const timerElement = document.getElementById('timer')
 const scoreElement = document.getElementById('score')
-const btn = document.querySelector('.playpause');
+const playPause = document.querySelector('.playpause');
 
 let numCorrect = 0
 let totalTime = 0
@@ -11,8 +11,8 @@ let numErrors = 0
 let playing = true
 let pausedTime = 0
 
-btn.addEventListener('click', () => {
-    btn.classList.toggle('playing');
+playPause.addEventListener('click', () => {
+    playPause.classList.toggle('playing');
     if (playing) {
         playing = false
         document.body.style.backgroundColor = "#cdc5c2"
@@ -68,19 +68,19 @@ function getQuote() {
     .then(data => data.content)
 }
 
-function preventBackspace(e) {
-    var evt = e || window.event;
-    if (evt) {
-        var keyCode = evt.charCode || evt.keyCode;
-        if (keyCode === 8) {
-            if (evt.preventDefault) {
-                evt.preventDefault();
-            } else {
-                evt.returnValue = false;
-            }
-        }
-    }
-}
+// function preventBackspace(e) {
+//     var evt = e || window.event;
+//     if (evt) {
+//         var keyCode = evt.charCode || evt.keyCode;
+//         if (keyCode === 8) {
+//             if (evt.preventDefault) {
+//                 evt.preventDefault();
+//             } else {
+//                 evt.returnValue = false;
+//             }
+//         }
+//     }
+// }
 
 async function renderNewQuote() {
     const quote = await getQuote()
@@ -101,14 +101,18 @@ function startTimer() {
         if (playing) {
             timer.innerText = (60 - pausedTime - getTime())
         }
+        if (timerElement.innerText === "0") {
+            playing = false
+            document.body.style.backgroundColor = "#D0596F"
+            playPause.style.display = 'none'
+            quoteInputElement.disabled = 'true'
+        }
     }, 1000);
 }
 
 function getTime() {
         return Math.floor((new Date() - startTime) / 1000)
 }
-
-if (timerElement.innerText == 0)
 
 startTimer()
 renderNewQuote()
