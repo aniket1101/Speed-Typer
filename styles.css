@@ -2,13 +2,103 @@
     box-sizing: border-box;
 }
 
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
 body {
-    display: flex;
+display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     margin: 0;
     background-color: #5cdb95;
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+.box {
+    position: absolute;
+    bottom: -100px;
+    background: #f2f2f2;
+    opacity: 0.6;
+    animation: animate 15s infinite ease;
+}
+.box:nth-child(1) {
+    width: 75px;
+    height: 75px;
+    left: 7%;
+    animation-delay: 1s;
+}
+.box:nth-child(2) {
+    width: 80px;
+    height: 80px;
+    left: 20%;
+    animation-delay: 5s;
+}
+.box:nth-child(3) {
+    width: 62px;
+    height: 62px;
+    left: 40%;
+    animation-delay: 9s;
+}
+.box:nth-child(4) {
+    width: 80px;
+    height: 80px;
+    left: 50%;
+    animation-delay: 2s;
+}
+.box:nth-child(5) {
+    width: 60px;
+    height: 60px;
+    left: 27%;
+    animation-delay: 10s;
+}
+.box:nth-child(6) {
+    width: 55px;
+    height: 55px;
+    left: 65%;
+    animation-delay: 5s;
+}
+.box:nth-child(7) {
+    width: 70px;
+    height: 70px;
+    left: 80%;
+    animation-delay: 9s;
+}
+.box:nth-child(8) {
+    width: 90px;
+    height: 90px;
+    left: 75%;
+    animation-delay: 3s;
+}
+.box:nth-child(9) {
+    width: 48px;
+    height: 48px;
+    left: 5%;
+    animation-delay: 9s;
+}
+@keyframes animate{
+    0%{
+        bottom: -100px;
+        transform: translateX(0);
+    }
+    50%{
+        transform: translateX(150px);
+    }
+    100%{
+        bottom: 1000px;
+        transform: translateX(-300px);
+    }
 }
 
 body, .quote-input {
@@ -21,6 +111,11 @@ body, .quote-input {
     border-radius: .5rem;
     width: 700px;
     max-width: 90%;
+    position: absolute;
+    z-index: 100;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .timer {
