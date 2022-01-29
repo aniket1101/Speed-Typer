@@ -156,6 +156,11 @@ body, .quote-input, .reload-button {
     border-radius: 0.5rem;
 }
 
+.quote-input.editing {
+    pointer-events: none;
+    opacity: 0.6;
+}
+
 .reload-button {
     display: inline-block;
     border-radius: 10px;
@@ -208,6 +213,42 @@ body, .quote-input, .reload-button {
 }
 .quote-input:focus {
     border-color: black;
+}
+
+.playpause {
+    width: 30px;
+    height: 30px;
+    padding: 20px;
+    top: 6rem;
+    vertical-align: middle;
+    margin: 5px;
+    position: fixed;
+    background: #edf5e1;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    clip-path: polygon(
+        0 0,
+        40% 0,
+        40% 100%,
+        60% 100%,
+        60% 0,
+        100% 0,
+        100% 100%,
+        0 100%
+    );
+}
+
+.playpause.playing {
+    clip-path: polygon(
+        0 0,
+        50% 25%,
+        50% 75%,
+        50% 75%,
+        50% 25%,
+        100% 50%,
+        100% 50%,
+        0 100%
+    );
 }
 
 .correct {

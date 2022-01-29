@@ -1,10 +1,31 @@
 const RANDOM_QUOTE_API = 'https://api.quotable.io/random'
 const quoteDisplayElement = document.getElementById('quoteDisplay')
-const quoteInputElement = document.getElementById('quoteInput')
+const quoteInputElement = document.querySelector('.quote-input')
 const timerElement = document.getElementById('timer')
 const scoreElement = document.getElementById('score')
+const btn = document.querySelector('.playpause');
 
 let numCorrect = 0
+let totalTime = 0
+let numErrors = 0
+let playing = true
+let pausedTime = 0
+
+btn.addEventListener('click', () => {
+    btn.classList.toggle('playing');
+    if (playing) {
+        playing = false
+        document.body.style.backgroundColor = "#cdc5c2"
+        quoteInputElement.classList.toggle('editing');
+    }
+    else {
+        playing = true
+        pausedTime = Number(timerElement.innerText)
+        startTimer()
+        document.body.style.backgroundColor = "#5cdb95"
+        quoteInputElement.classList.toggle('editing');
+    }
+});
 
 quoteInputElement.addEventListener('input', () => {
     const arrayQuote = quoteDisplayElement.querySelectorAll('span')
@@ -26,12 +47,16 @@ quoteInputElement.addEventListener('input', () => {
             characterSpan.classList.remove('correct')
             characterSpan.classList.add('incorrect')
             correct = false
+            numErrors+=1
+            // console.log(numErrors)
+            console.log(btn.classList.value)
         }
     })
 
     if (correct) {
         numCorrect = numCorrect + 1
-        console.log(numCorrect)
+        totalTime = Number(totalTime) + Number(timerElement.innerText)
+        console.log(totalTime)
         scoreElement.innerText = "Score: " + numCorrect
         renderNewQuote()
     }
@@ -52,20 +77,22 @@ async function renderNewQuote() {
         quoteDisplayElement.appendChild(characterSpan)
     })
     quoteInputElement.value = null
+    timerElement.innerText = 0
     startTimer()
 }
 
 let startTime
 function startTimer() {
-    timerElement.innerText = 0
     startTime = new Date()
     setInterval(() => {
-        timer.innerText = getTime()
+        if (playing) {
+            timer.innerText = (getTime() + pausedTime)
+        }
     }, 1000);
 }
 
 function getTime() {
-    return Math.floor((new Date() - startTime) / 1000)
+        return Math.floor((new Date() - startTime) / 1000)
 }
 
 renderNewQuote()
