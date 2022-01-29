@@ -91,7 +91,6 @@ async function renderNewQuote() {
         quoteDisplayElement.appendChild(characterSpan)
     })
     quoteInputElement.value = null
-    timerElement.innerText = 0
     pausedTime = 0
 }
 
@@ -108,6 +107,8 @@ function startTimer() {
 function getTime() {
         return Math.floor((new Date() - startTime) / 1000)
 }
+
+if (timerElement.innerText == 0)
 
 startTimer()
 renderNewQuote()
