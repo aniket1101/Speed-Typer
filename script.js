@@ -2,6 +2,9 @@ const RANDOM_QUOTE_API = 'https://api.quotable.io/random'
 const quoteDisplayElement = document.getElementById('quoteDisplay')
 const quoteInputElement = document.getElementById('quoteInput')
 const timerElement = document.getElementById('timer')
+const scoreElement = document.getElementById('score')
+
+let numCorrect = 0
 
 quoteInputElement.addEventListener('input', () => {
     const arrayQuote = quoteDisplayElement.querySelectorAll('span')
@@ -27,6 +30,9 @@ quoteInputElement.addEventListener('input', () => {
     })
 
     if (correct) {
+        numCorrect = numCorrect + 1
+        console.log(numCorrect)
+        scoreElement.innerText = "Score: " + numCorrect
         renderNewQuote()
     }
 })
