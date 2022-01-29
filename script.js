@@ -6,7 +6,6 @@ const scoreElement = document.getElementById('score')
 const playPause = document.querySelector('.playpause');
 
 let numCorrect = 0
-let totalTime = 0
 let numErrors = 0
 let playing = true
 let pausedTime = 0
@@ -47,16 +46,14 @@ quoteInputElement.addEventListener('input', () => {
             characterSpan.classList.remove('correct')
             characterSpan.classList.add('incorrect')
             correct = false
-            numErrors+=1
-            console.log(numErrors)
-            console.log(btn.classList.value)
+            // numErrors+=1
+            // console.log(numErrors)
+            // console.log(btn.classList.value)
         }
     })
 
     if (correct) {
         numCorrect = numCorrect + 1
-        totalTime = Number(totalTime) + Number(timerElement.innerText)
-        console.log(totalTime)
         scoreElement.innerText = "Score: " + numCorrect
         renderNewQuote()
     }
