@@ -78,6 +78,7 @@ async function renderNewQuote() {
     })
     quoteInputElement.value = null
     timerElement.innerText = 0
+    pausedTime = 0
     startTimer()
 }
 
